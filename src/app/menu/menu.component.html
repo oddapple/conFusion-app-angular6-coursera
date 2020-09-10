@@ -1,0 +1,60 @@
+<div class="container"
+  fxLayout="column"
+  fxLayoutGap="10px">
+
+  <div fxFlex>
+    <div>
+      <h3>Menu</h3>
+      <hr>
+    </div>
+  </div>
+
+<div fxFlex *ngIf="dishes" [@expand]>
+  <mat-grid-list cols="2" rowHeight="200px">
+    <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]" appHighlight>
+      <img height="200px" src="{{ BaseURL + dish.image }}" alt={{dish.name}}>
+        <mat-grid-tile-footer>
+          <h1> {{dish.name | uppercase}} </h1>
+        </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div [hidden]="dishes || errMess">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+<div fxFlex *ngIf="errMess">
+  <h2> Error </h2>
+  <h4> {{errMess}} </h4>
+</div>
+
+
+</div>
+
+<!--
+My work process
+
+Task 1 (how I did it):
+1. ng generate component dishdetail (in terminal or git bash) to get the dishdetail folder in app
+2. check if dishdetail component is imported in app.modules.ts to be used where you need it. it is there.
+3. write the "pathway" to dishdetail.component.html here (in menu.components.html). it will be <app-dishdetail></app-dishdetail>
+it will make all that is in that file to go here and be display on the screen
+4. check if it works. it does. good.
+5. put the code from instructions in dishdetail.component.html so insted of "dishdetail works!" we woud get 2 things
+"Display the details of the Dish here" on the left and "Display the list of comments here" on the right.
+6. Check. It works. Good.
+
+Task 2:
+1.Copied the test from task to into dishdetail.component.ts and introduced a new variable below it in exports.
+2. Wrote code that displays the details of the dish in dishdetail.component.html using exercise-instructions-angular-components-part-2
+as an example.
+3. Cheked if the contend appeared on the left under the menu. in did. Good.
+
+Task 3:
+1. using exercise-instructions-angular-components-part-1 and 2
+as an example, i wrote the code for the comments but it needed debuging.
+2. Found the right way to reach comments in inner property  of a JavaScript object (dishdetail.component.ts) but writing
+*ngFor="let comment of dish.comments" in <mat-list-item>
+3. Displayed the nested "data" in comments by usind {{comments.---}} after <p matLine>.
+4. Used the data after | in {{data | data}} to show time in a nice way.
+4. Cheked if the content appeared properly. in did. Good.
+-->
